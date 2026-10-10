@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiAleX — Marketing Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Unbounded', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+        .red-accent { color: #E30613; display: inline; }
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 24px 48px; display: flex; justify-content: space-between; align-items: center;
+            background-color: rgba(5, 5, 5, 0.9); backdrop-filter: blur(12px);
+            z-index: 100; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .logo-wrap { display: flex; flex-direction: column; line-height: 1; }
+        .logo { font-family: 'Inter', sans-serif; font-size: 2.2rem; font-weight: 900; text-decoration: none; letter-spacing: -2px; }
+        .logo .red { color: #E30613; } .logo .white { color: #ffffff; }
+        .logo-sub { font-family: 'Inter', sans-serif; font-size: 0.55rem; font-weight: 800; letter-spacing: 4px; color: #aaaaaa; margin-top: 4px; text-transform: uppercase; }
+        .logo-sub .under { text-decoration: underline; text-decoration-color: #E30613; text-underline-offset: 3px; }
+        nav ul { display: flex; list-style: none; gap: 40px; }
+        nav a { color: #aaaaaa; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; transition: color 0.3s ease; letter-spacing: 1px; }
+        nav a:hover { color: #E30613; }
+        .header-btn { 
+            padding: 14px 28px; font-size: 0.75rem; font-weight: 800; font-family: 'Unbounded', sans-serif; 
+            color: #ffffff; background-color: #E30613; border: none; border-radius: 100px; 
+            cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; 
+        }
+        .header-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(227, 6, 19, 0.6); }
+        .hero {
+            min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: space-between;
+            padding: 140px 48px 60px; position: relative; overflow: hidden;
+            background-image: url('noise1.webp'); background-size: cover; background-position: center right; background-repeat: no-repeat;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0.1) 50%, rgba(5,5,5,0.7) 100%);
+            z-index: 1; pointer-events: none;
+        }
+        .hero-text { flex: 1; max-width: 750px; z-index: 10; position: relative; left: 2vw; }
+        .hero-pre, .hero-post {
+            font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 800; text-transform: uppercase;
+            letter-spacing: -2px; line-height: 1.1; opacity: 0.95; text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+        }
+        .hero-pre { margin-bottom: 15px; }
+        .hero-post { margin-top: 15px; margin-bottom: 40px; white-space: nowrap; font-size: clamp(3.2rem, 6vw, 5.2rem); }
+        .hero-main {
+            font-size: clamp(6rem, 12vw, 11rem); font-weight: 900; line-height: 0.9;
+            text-transform: uppercase; letter-spacing: -4px; text-shadow: 0 10px 40px rgba(0,0,0,0.9);
+        }
+        .highlight { color: #E30613; display: inline-block; text-shadow: 0 0 30px rgba(227, 6, 19, 0.5), 0 10px 40px rgba(0,0,0,0.9); }
+        .hero p {
+            font-size: clamp(1rem, 1.2vw, 1.2rem); color: #eeeeee; line-height: 1.6; font-family: 'Inter', sans-serif;
+            margin-bottom: 40px; max-width: 500px; text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+        }
+        .cta-button {
+            padding: 20px 48px; font-size: clamp(0.9rem, 1vw, 1rem); font-weight: 800; font-family: 'Unbounded', sans-serif;
+            color: #ffffff; background-color: #E30613; border: none; border-radius: 100px;
+            cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(227, 6, 19, 0.7); }
+        .marquee { width: 100%; overflow: hidden; background-color: #E30613; padding: 16px 0; white-space: nowrap; position: absolute; bottom: 0; left: 0; z-index: 20; }
+        .marquee-content { display: inline-block; animation: scroll 25s linear infinite; font-weight: 800; color: #ffffff; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 2px; }
+        .marquee-content span { margin: 0 30px; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .services { padding: 120px 48px; background-color: #050505; }
+        .section-label { font-size: 0.85rem; font-weight: 700; color: #E30613; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 24px; font-family: 'Inter', sans-serif; }
+        .section-title { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; text-transform: uppercase; line-height: 1; letter-spacing: -2px; max-width: 900px; margin-bottom: 60px; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1400px; margin: 0 auto; }
+        .service-card { 
+            background-color: #0d0d0d; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; 
+            padding: 40px 32px; transition: all 0.4s ease; position: relative; overflow: hidden;
+            opacity: 0; transform: translateY(50px);
+        }
+        .service-card.visible { opacity: 1; transform: translateY(0); }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background-color: #E30613; transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+        .service-card:hover { border-color: rgba(227, 6, 19, 0.4); transform: translateY(-8px); }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-number { font-size: 0.9rem; font-weight: 800; color: #E30613; margin-bottom: 30px; font-family: 'Inter', sans-serif; }
+        .service-card h3 { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; margin-bottom: 16px; letter-spacing: -1px; }
+        .service-card p { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #888; line-height: 1.6; font-weight: 400; }
+        .service-arrow { position: absolute; bottom: 32px; right: 32px; width: 44px; height: 44px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; font-size: 1.1rem; }
+        .service-card:hover .service-arrow { background-color: #E30613; transform: rotate(-45deg); }
+        .work { padding: 120px 48px; background-color: #050505; border-top: 1px solid rgba(255,255,255,0.05); }
+        .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 1400px; margin: 0 auto; }
+        .work-item {
+            position: relative; aspect-ratio: 4/3; border-radius: 24px; overflow: hidden;
+            background-color: #0d0d0d; cursor: pointer;
+        }
+        .work-img {
+            width: 100%; height: 100%; object-fit: cover;
+            /* filter: grayscale(100%) contrast(1.1); */
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .work-overlay {
+            position: absolute; inset: 0;
+            background: rgba(227, 6, 19, 0.9);
+            opacity: 0; transition: opacity 0.4s ease;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px;
+        }
+        .work-item:hover .work-overlay { opacity: 1; }
+        .work-item:hover .work-img { filter: grayscale(0%); transform: scale(1.05); }
+        .work-client-tag { font-size: 0.8rem; font-weight: 700; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+        .work-title { font-size: 2rem; font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; color: #fff; }
+        .work-result { font-size: 1.1rem; color: #ffffff; font-weight: 700; border: 1px solid #fff; padding: 8px 16px; border-radius: 100px; }
+        .manifesto {
+            padding: 120px 48px; background-color: #050505; 
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .manifesto-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; 
+            max-width: 1400px; margin: 0 auto; align-items: center;
+        }
+        .manifesto-visual {
+            width: 100%; aspect-ratio: 3/4; border-radius: 24px; overflow: hidden;
+            position: relative; background-color: #111;
+        }
+        .manifesto-visual img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(100%); transition: filter 0.5s;
+        }
+        .manifesto-visual:hover img { filter: grayscale(0%); }
+        .manifesto-content { padding-right: 40px; }
+        .manifesto-label { font-size: 0.85rem; font-weight: 700; color: #E30613; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 30px; font-family: 'Inter', sans-serif; }
+        .manifesto-title { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 40px; }
+        .highlight-red { color: #E30613; display: inline-block; }
+        .manifesto-text { font-size: 1.1rem; color: #aaaaaa; line-height: 1.7; margin-bottom: 50px; font-family: 'Inter', sans-serif; font-weight: 400; }
+        .manifesto-stats { display: flex; gap: 60px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; }
+        .m-stat { display: flex; flex-direction: column; }
+        .m-num { font-size: 2.5rem; font-weight: 900; color: #ffffff; line-height: 1; margin-bottom: 8px; }
+        .m-label { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        footer { padding: 80px 48px; background-color: #000; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; }
+        .footer-cta { font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; text-transform: uppercase; margin-bottom: 40px; }
+        .footer-email { font-size: 1.5rem; color: #E30613; text-decoration: none; font-weight: 700; transition: color 0.3s; }
+        .footer-email:hover { color: #ffffff; }
+        .footer-copy { margin-top: 60px; font-size: 0.8rem; color: #444; font-family: 'Inter', sans-serif; }
+        @media (max-width: 1024px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; justify-content: flex-start; background-position: center center; }
+            .hero-text { max-width: 100%; padding-right: 0; margin-bottom: 40px; align-items: center; display: flex; flex-direction: column; left: 0; }
+            .hero-post { white-space: normal; font-size: 2.5rem; } 
+            .hero p { margin: 0 auto 30px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card { opacity: 1; transform: none; }
+            .work-grid { grid-template-columns: 1fr; }
+            .manifesto-container { grid-template-columns: 1fr; gap: 40px; }
+            .manifesto-visual { aspect-ratio: 16/9; order: -1; }
+            .manifesto-content { padding-right: 0; }
+        }
+        @media (max-width: 768px) {
+            header { padding: 16px 20px; flex-direction: column; gap: 12px; }
+            nav ul { gap: 16px; font-size: 0.7rem; }
+            .logo { font-size: 1.6rem; }
+            .hero-main { font-size: 5rem; letter-spacing: -2px; }
+            .hero-pre { font-size: 2.5rem; }
+            .services, .work, .manifesto { padding: 80px 24px; }
+            .manifesto-title { letter-spacing: -1px; margin-bottom: 30px; font-size: 2.5rem; }
+            .manifesto-stats { flex-direction: column; gap: 30px; }
+            .work-title { font-size: 1.5rem; }
+            footer { padding: 60px 24px; }
+            .footer-cta { font-size: 2rem; }
+            .footer-email { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-wrap">
+            <a href="#" class="logo"><span class="red">M</span><span class="white">ulti</span><span class="red">A</span><span class="white">le</span><span class="red">X</span></a>
+            <div class="logo-sub"><span class="under">M</span>OMENTOUS. <span class="under">A</span>CTUAL. <span class="under">E</span>XCELLENT</div>
+        </div>
+        <nav>
+            <ul><li><a href="#services">Services</a></li><li><a href="#work">Work</a></li><li><a href="#about">About</a></li></ul>
+        </nav>
+        <button class="header-btn">Get in touch</button>
+    </header>
+    <section class="hero">
+        <div class="hero-text">
+            <div class="hero-pre">We create</div>
+            <div class="hero-main"><span class="highlight">BUZZ</span></div>
+            <div class="hero-post">around your brand</div>
+            <p>MultiAleX is marketing that can't be ignored. Strategy, creativity and measurable results for those who want to be first.</p>
+            <button class="cta-button">Start a project</button>
+        </div>
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>STRATEGY</span> • <span>CREATIVE</span> • <span>BRANDING</span> • <span>MEDIA BUYING</span> • <span>ANALYTICS</span> • 
+                <span>STRATEGY</span> • <span>CREATIVE</span> • <span>BRANDING</span> • <span>MEDIA BUYING</span> • <span>ANALYTICS</span> • 
+            </div>
+        </div>
+    </section>
+    <section class="services" id="services">
+        <div class="section-label">— What we do</div>
+        <h2 class="section-title">Built to make <span class="red-accent">your brand impossible</span> to ignore.</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-number">01</div>
+                <h3>Strategy</h3>
+                <p>Data-driven strategies that turn market insights into real, measurable growth for your business.</p>
+                <div class="service-arrow">→</div>
+            </div>
+            <div class="service-card">
+                <div class="service-number">02</div>
+                <h3>Creative</h3>
+                <p>Bold ideas and content that cut through the noise and make your audience stop scrolling.</p>
+                <div class="service-arrow">→</div>
+            </div>
+            <div class="service-card">
+                <div class="service-number">03</div>
+                <h3>Media</h3>
+                <p>Smart media buying across all digital channels — every dollar works harder for your brand.</p>
+                <div class="service-arrow">→</div>
+            </div>
+        </div>
+    </section>
+    <section class="work" id="work">
+        <div class="section-label">— Selected Work</div>
+        <h2 class="section-title">Results that speak <span class="red-accent">louder</span> than noise.</h2>
+        <div class="work-grid">
+            <div class="work-item">
+                <img src="workn1.webp" alt="TechFlow" class="work-img">
+                <div class="work-overlay">
+                    <div class="work-client-tag">TechFlow SaaS</div>
+                    <h3 class="work-title">B2B Lead Gen System</h3>
+                    <div class="work-result">+340% Qualified Leads</div>
+                </div>
+            </div>
+            <div class="work-item">
+                <img src="workn2.webp" alt="Urban Wear" class="work-img">
+                <div class="work-overlay">
+                    <div class="work-client-tag">Urban Wear</div>
+                    <h3 class="work-title">Global Rebranding</h3>
+                    <div class="work-result">4.8x Return on Ad Spend</div>
+                </div>
+            </div>
+            <div class="work-item">
+                <img src="workn3.webp" alt="FinEdge" class="work-img">
+                <div class="work-overlay">
+                    <div class="work-client-tag">FinEdge Bank</div>
+                    <h3 class="work-title">Digital Transformation</h3>
+                    <div class="work-result">-60% CAC Reduction</div>
+                </div>
+            </div>
+            <div class="work-item">
+                <img src="workn4.webp" alt="Nexus" class="work-img">
+                <div class="work-overlay">
+                    <div class="work-client-tag">Nexus Corp</div>
+                    <h3 class="work-title">Product Launch Campaign</h3>
+                    <div class="work-result">12M+ Organic Impressions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="manifesto" id="about">
+        <div class="manifesto-container">
+            <div class="manifesto-visual">
+                <img src="noise1.webp" alt="Agency Vibe">
+            </div>
+            <div class="manifesto-content">
+                <div class="manifesto-label">— Our Philosophy</div>
+                <h2 class="manifesto-title">
+                    We don't follow trends.<br>
+                    <span class="highlight-red">We create noise</span><br>
+                    that makes them irrelevant.
+                </h2>
+                <p class="manifesto-text">
+                    In a world saturated with content, being "visible" is not enough. 
+                    You need to be undeniable. MultiAleX combines raw creativity with 
+                    surgical precision to turn your brand into a cultural signal. 
+                    No fluff. No vanity metrics. Just impact that echoes.
+                </p>
+                <div class="manifesto-stats">
+                    <div class="m-stat">
+                        <span class="m-num">100%</span>
+                        <span class="m-label">Obsession with Results</span>
+                    </div>
+                    <div class="m-stat">
+                        <span class="m-num">0%</span>
+                        <span class="m-label">Tolerance for Boring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-cta"><span class="red-accent">READY</span> to make some noise?</div>
+        <a href="mailto:hello@multialex.com" class="footer-email">hello@multialex.com</a>
+        <div class="footer-copy">© 2026 MultiAleX Agency. All rights reserved.</div>
+    </footer>
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const index = Array.from(document.querySelectorAll('.service-card')).indexOf(entry.target);
+                    entry.target.style.transitionDelay = `${index * 150}ms`;
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.service-card').forEach(card => observer.observe(card));
+    </script>
+</body>
+</html>
